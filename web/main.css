@@ -1,0 +1,13 @@
+html {
+    background-color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+.option-element {
+    font-family: monospace, 'Courier New', Courier;
+    color: white;
+    cursor: pointer;
+}

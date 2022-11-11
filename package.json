@@ -1,0 +1,27 @@
+{
+  "name": "image-processing-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HrvojeCosic/Image-processing-web.git"
+  },
+  "author": "Hrvoje Ćosić",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HrvojeCosic/Image-processing-web/issues"
+  },
+  "homepage": "https://github.com/HrvojeCosic/Image-processing-web#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0"
+  }
+}
