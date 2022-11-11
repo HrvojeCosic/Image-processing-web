@@ -4,3 +4,4 @@
 *.bmp
 *.png
 node_modules
+bundle.js

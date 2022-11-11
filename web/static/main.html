@@ -3,8 +3,9 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <input type="file" oninput="handleImageInput(this.value)">
+        <input id="image-input" type="file" multiple>
+        <p id="selected-file-title"></p>
         <div id="image-processing-options"></div>
     </body>
 </html>
-<script src="main.js"></script>
+<script src="../bundle.js"></script>
