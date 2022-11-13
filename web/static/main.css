@@ -11,3 +11,7 @@ html {
     color: white;
     cursor: pointer;
 }
+
+#selected-file-titles > * {
+    color: white;
+}
