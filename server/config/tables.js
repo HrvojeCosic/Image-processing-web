@@ -6,5 +6,10 @@ module.exports.createMissingTables = async () => {
         process_id SERIAL PRIMARY KEY,
         image_name VARCHAR(255)
     );
+
+    CREATE TABLE IF NOT EXISTS public.image_processing_option (
+        name VARCHAR(32) PRIMARY KEY,
+        parameters VARCHAR(32)[]
+    );
 `)
 }

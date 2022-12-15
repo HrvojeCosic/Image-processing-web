@@ -9,3 +9,10 @@ module.exports.createImageProcess = async (imageFilename) => {
 
         return process_id;
 }
+
+module.exports.getImageProcessingOptions = async () => {
+        const { rows } = await db.query(`
+                SELECT * FROM public.image_processing_option;
+        `)
+        return rows;
+}

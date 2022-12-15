@@ -4,7 +4,13 @@ const imageServices = require('./services');
 
 module.exports.submitImage = async (req, res) => {
 	const processId = await imageServices.submitImage(req.file)
-	res.status(200).send({processId})
+	const imageProcessingOptions = await imageServices.getImageProcessingOptions();
+	
+	res.status(200).send({
+		processId, imageProcessingOptions
+	})
+
+
 
 	// // console.log(req.file);
 	// // try {

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./config/database')
 const tables = require('./config/tables')
+const tableData = require('./config/tableData')
 const app = express();
 const port = 4000;
 
@@ -32,3 +33,4 @@ app.use((err, req, res, next) => {
 const imageRouter = require('./modules/image/routes');
 app.use('/image', imageRouter);
 tables.createMissingTables()
+tableData.createDefaultTableData()
