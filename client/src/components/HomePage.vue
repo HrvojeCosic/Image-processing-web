@@ -6,16 +6,32 @@
       enctype="multipart/form-data"
       @change="uploadImage"
     />
+    <select>
+      <option v-for="option in proessingOptions" :key="option" :value="option">
+        {{ option }}
+      </option>
+    </select>
   </div>
 </template>
 
 <script>
+import "../styles/HomePage.css";
 import $axios from "../../apiRepository/globalRepository";
 export default {
   data() {
     return {
       previewImage: null,
       processId: null,
+      proessingOptions: [
+        "binary",
+        "grayscale",
+        "blur",
+        "edge",
+        "sort",
+        "resize",
+        "flip",
+        "rotate",
+      ],
     };
   },
   methods: {
