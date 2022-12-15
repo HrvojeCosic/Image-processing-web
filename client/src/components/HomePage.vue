@@ -15,13 +15,16 @@ export default {
   data() {
     return {
       previewImage: null,
+      processId: null,
     };
   },
   methods: {
-    uploadImage(input) {
+    async uploadImage(input) {
       const image = input.target.files[0];
       try {
-        $axios.imageRepository.uploadImage(image);
+        const { data } = await $axios.imageRepository.uploadImage(image);
+        this.processId = data.processId;
+        console.log(this.processId);
       } catch (error) {
         console.error(error);
         alert("Image uploading failed");

@@ -1,5 +1,6 @@
+const repository = require('./repository')
 
-
-module.exports.saveImage = async (image) => {
-    console.log(image);
+module.exports.submitImage = async (image) => {
+    const processId = await repository.createImageProcess(image.filename);
+    return processId;
 }

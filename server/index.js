@@ -15,9 +15,14 @@ app.listen(port, () => {
  * 
  */
 const corsOptions = {
-	origin: 'http://127.0.0.1:5173',
+	origin: 'http://localhost:5173',
 };
 app.use(cors(corsOptions));
+
+app.use((err, req, res, next) => {
+	console.log("ERROR: " + err);
+	res.status(500).send({message: "Something went wrong while processing the request."})
+})
 
 
 /**

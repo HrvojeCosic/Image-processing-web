@@ -3,11 +3,8 @@ const imageServices = require('./services');
 
 
 module.exports.submitImage = async (req, res) => {
-	try {
-		imageServices.saveImage(req.file)
-	} catch (error) {
-		console.log(`error submitting image: ${error}`);
-	}
+	const processId = await imageServices.submitImage(req.file)
+	res.status(200).send({processId})
 
 	// // console.log(req.file);
 	// // try {
@@ -37,5 +34,4 @@ module.exports.submitImage = async (req, res) => {
 	// // 	console.error(`chdir error: ${err}`);
 	// // }
 
-	res.send('aa').status(200);
 };
