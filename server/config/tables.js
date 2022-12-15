@@ -1,7 +1,7 @@
-const db = require('./database')
+const db = require('./database');
 
 module.exports.createMissingTables = async () => {
-    await db.query(`
+	await db.query(`
     CREATE TABLE IF NOT EXISTS public.image_process (
         process_id SERIAL PRIMARY KEY,
         image_name VARCHAR(255)
@@ -11,5 +11,5 @@ module.exports.createMissingTables = async () => {
         name VARCHAR(32) PRIMARY KEY,
         parameters VARCHAR(32)[]
     );
-`)
-}
+`);
+};

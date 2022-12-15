@@ -13,6 +13,6 @@ module.exports.getImageProcessingOptions = async () => {
 module.exports.submitImageProcessingOptions = async (
 	processId, processingOption, processingValue) => {
 	const { process_id, image_name } = await repository.getProcess(processId);
-	console.log(image_name, processingOption, processingValue, process_id);
+	console.log(processingOption, processingValue, process_id, image_name);
 
 };

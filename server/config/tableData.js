@@ -1,7 +1,7 @@
-const db = require('./database')
+const db = require('./database');
 
 module.exports.createDefaultTableData = async () => {
-    await db.query(`
+	await db.query(`
         INSERT INTO public.image_processing_option (name, parameters)
         VALUES
         ('binary', ARRAY['']),
@@ -11,5 +11,5 @@ module.exports.createDefaultTableData = async () => {
         ('rotate', ARRAY['direction']),
         ('pixel sort', ARRAY[''])
         ON CONFLICT DO NOTHING
-    `)
-}
+    `);
+};
