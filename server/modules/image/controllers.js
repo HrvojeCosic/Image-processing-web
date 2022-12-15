@@ -1,6 +1,4 @@
 const fs = require('fs');
-const { exec } = require('child_process');
-const { chdir, cwd }= require('node:process');
 const imageServices = require('./services');
 
 

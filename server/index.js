@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const db = require('./config/database')
+const tables = require('./config/tables')
 const app = express();
 const port = 4000;
 
@@ -50,3 +52,4 @@ const imageUpload = multer({
 
 const imageRouter = require('./modules/image/routes');
 app.use('/image', imageUpload.single('file'), imageRouter);
+tables.createMissingTables()
