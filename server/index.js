@@ -25,6 +25,8 @@ app.use((err, req, res, next) => {
 	res.status(500).send({message: "Something went wrong while processing the request."})
 })
 
+app.use(express.json())
+
 
 /**
  * Routers

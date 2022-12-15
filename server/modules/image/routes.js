@@ -7,6 +7,7 @@ const ImageControllers = require('./controllers');
 
 
 router.post('/', imageUpload.single('file'), use(ImageControllers.submitImage));
+router.post('/processingOptions', use(ImageControllers.submitImageProcessingOptions));
 
 
 module.exports = router;

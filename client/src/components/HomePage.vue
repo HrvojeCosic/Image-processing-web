@@ -24,9 +24,11 @@
         chosenImageProcessingOptionIdx &&
         chosenImageProcessingOption.parameters[0].length
       "
+      v-model="inputtedImageProcessingValue"
       type="text"
       :placeholder="chosenImageProcessingOption.parameters"
     />
+    <input type="submit" @click="submitImageProcessingOptions" />
   </div>
 </template>
 
@@ -39,6 +41,7 @@ export default {
       previewImage: null,
       processId: null,
       chosenImageProcessingOptionIdx: null,
+      inputtedImageProcessingValue: "",
       imageProcessingOptions: [],
     };
   },
@@ -66,6 +69,22 @@ export default {
     chooseImageProcessingOption() {
       const selectElement = this.$refs.optionSelector;
       this.chosenImageProcessingOptionIdx = selectElement.selectedIndex;
+    },
+    async submitImageProcessingOptions() {
+      const option = this.chosenImageProcessingOptionIdx
+        ? this.imageProcessingOptions[this.chosenImageProcessingOptionIdx].name
+        : this.imageProcessingOptions[0];
+
+      try {
+        await $axios.imageRepository.submitImageProcessingOptions(
+          this.processId,
+          option,
+          this.inputtedImageProcessingValue
+        );
+      } catch (error) {
+        console.error(error);
+        alert("Sending image processing parameters failed");
+      }
     },
   },
 };

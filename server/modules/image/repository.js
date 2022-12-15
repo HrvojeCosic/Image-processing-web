@@ -6,7 +6,6 @@ module.exports.createImageProcess = async (imageFilename) => {
                 (image_name) VALUES ($1)
                 RETURNING process_id;
         `, [imageFilename])
-
         return process_id;
 }
 
@@ -15,4 +14,12 @@ module.exports.getImageProcessingOptions = async () => {
                 SELECT * FROM public.image_processing_option;
         `)
         return rows;
+}
+
+module.exports.getProcess = async (id) => {
+        const { rows } = await db.query(`
+                SELECT * FROM public.image_process
+                WHERE process_id = $1
+        `, [id])
+        return rows[0];
 }
