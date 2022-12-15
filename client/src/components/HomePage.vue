@@ -1,6 +1,11 @@
 <template>
   <div>
-    <input type="file" accept="image" @change="uploadImage" />
+    <input
+      type="file"
+      accept="image"
+      enctype="multipart/form-data"
+      @change="uploadImage"
+    />
   </div>
 </template>
 
