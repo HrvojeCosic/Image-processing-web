@@ -1,11 +1,20 @@
 <template>
   <div>
+    <h1>Image Upload</h1>
+    <p>Select an image to upload:</p>
+
     <input
       type="file"
       accept="image"
       enctype="multipart/form-data"
-      @change="uploadImage"
+      @change="handleImageInput"
+      id="fileInput"
     />
+    <br />
+    <br />
+    <img id="preview" :src="previewImage" />
+    <br />
+    <br />
     <select
       ref="optionSelector"
       v-if="imageProcessingOptions.length"
@@ -19,6 +28,7 @@
         {{ option.name }}
       </option>
     </select>
+    <br />
     <input
       v-if="
         chosenImageProcessingOptionIdx &&
@@ -28,12 +38,17 @@
       type="text"
       :placeholder="chosenImageProcessingOption.parameters"
     />
-    <input type="submit" @click="submitImageProcessingOptions" />
+    <br />
+    <input
+      v-if="chosenImageProcessingOptionIdx !== false"
+      type="submit"
+      @click="submitImageProcessingOptions"
+    />
   </div>
 </template>
 
 <script>
-import "../styles/HomePage.css";
+import "../../main.css";
 import $axios from "../../apiRepository/globalRepository";
 export default {
   data() {
@@ -54,8 +69,10 @@ export default {
     },
   },
   methods: {
-    async uploadImage(input) {
+    async handleImageInput(input) {
       const image = input.target.files[0];
+      this.updateImagePreview(image);
+
       try {
         const { data } = await $axios.imageRepository.uploadImage(image);
         this.processId = data.processId;
@@ -65,6 +82,13 @@ export default {
         console.error(error);
         alert("Image uploading failed");
       }
+    },
+    updateImagePreview(image) {
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.addEventListener("load", () => {
+        this.previewImage = reader.result;
+      });
     },
     chooseImageProcessingOption() {
       const selectElement = this.$refs.optionSelector;
@@ -89,3 +113,25 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+img {
+  max-width: 300px;
+  height: auto;
+}
+select,
+input,
+button {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 5px 0;
+}
+</style>
