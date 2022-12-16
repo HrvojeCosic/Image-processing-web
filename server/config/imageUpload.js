@@ -13,7 +13,7 @@ const imageUpload = multer({
 	},
 	storage: multer.diskStorage({
 		destination: async (req, file, cb) => {
-			const dirPath = './uploadedImages/';
+			const dirPath = './';
 
 			fs.mkdir(dirPath, {recursive: true}, (err) => {
 				if (err) {

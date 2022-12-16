@@ -19,9 +19,7 @@ module.exports.submitImageProcessingOptions = async (
 	const { process_id, image_name } = await repository.getProcess(processId);
 
 	console.log(processingOption, processingValue, process_id, image_name);
-	const imagePath = '../uploadedImages';
-
-	exec(`gcc *.c */*.c -o imageProcessing -D imagepath="${imagePath}"`,
+	exec(`gcc *.c */*.c -o ../imageProcessing -D originalFilename="${image_name}"`,
 		{cwd: 'src'},
 		(error) => {
 			if (error) {
@@ -30,7 +28,6 @@ module.exports.submitImageProcessingOptions = async (
 			}
 
 			execFile('imageProcessing.exe',
-				{cwd: 'src'},
 				(error, stdout, stderr) => {
 					if (error) {
 						return console.error(`exec error: ${error}`);
