@@ -10,21 +10,14 @@
 #define STRINGIZE(param) #param
 #define STRINGIZE_VALUE_OF(param) STRINGIZE(param)
 
-int counter = 0;
-char filename[64];
 
-void setProcessedImageFilenameIndex () {
-    char counterStringified[10] = {0};
-    sprintf(counterStringified, "%d", counter);
-    sprintf(processedImgFilename, "%s%s%s",
-    "processedImg", counterStringified, getImgType(filename));
-    rename("processedImg.jpg", processedImgFilename );
-}
-
-
-int main(int argc, char **argv) {
+int main() {
+    char filename[64];
     strcpy(filename, STRINGIZE_VALUE_OF(originalFilename));
-    setProcessedImageFilenameIndex();
+
+    sprintf(processedImgFilename, "%s%s%s",
+            filename, "-processed", getImgType(filename));
+    rename("processedImg.jpg", processedImgFilename );
 
     applyBinary(STRINGIZE_VALUE_OF(originalFilename));
 
