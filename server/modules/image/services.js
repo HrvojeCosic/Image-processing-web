@@ -18,8 +18,14 @@ module.exports.submitImageProcessingOptions = async (
 	processId, processingOption, processingValue) => {
 	const { process_id, image_name } = await repository.getProcess(processId);
 
-	console.log(processingOption, processingValue, process_id, image_name);
-	exec(`gcc *.c */*.c -o ../imageProcessing -D originalFilename="${image_name}"`,
+	console.log('TEST',processingOption, processingValue, process_id, image_name);
+	const command = `gcc *.c */*.c -o ../imageProcessing 
+		-D originalFilename="${image_name}"
+	 	-D processingOption="${processingOption}"
+	  	-D processingValue="${processingValue ? processingValue : 'NONE'}"`
+		.split('\n').join(' ').replace(/\s+/g, ' ');
+
+	exec(command,
 		{cwd: 'src'},
 		(error) => {
 			if (error) {

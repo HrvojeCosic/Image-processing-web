@@ -36,13 +36,14 @@
       "
       v-model="inputtedImageProcessingValue"
       type="text"
-      :placeholder="chosenImageProcessingOption.parameters"
+      :placeholder="`${chosenImageProcessingOption.parameters} (${chosenImageProcessingOption.possible_values})`"
     />
     <br />
     <input
       v-if="chosenImageProcessingOptionIdx !== false"
       type="submit"
       @click="submitImageProcessingOptions"
+      style="cursor: pointer"
     />
   </div>
 </template>
@@ -97,7 +98,7 @@ export default {
     async submitImageProcessingOptions() {
       const option = this.chosenImageProcessingOptionIdx
         ? this.imageProcessingOptions[this.chosenImageProcessingOptionIdx].name
-        : this.imageProcessingOptions[0];
+        : this.imageProcessingOptions[0].name;
 
       try {
         await $axios.imageRepository.submitImageProcessingOptions(

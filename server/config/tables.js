@@ -9,7 +9,8 @@ module.exports.createMissingTables = async () => {
 
     CREATE TABLE IF NOT EXISTS public.image_processing_option (
         name VARCHAR(32) PRIMARY KEY,
-        parameters VARCHAR(32)[]
+        parameters VARCHAR(32)[],
+        possible_values VARCHAR(32)[]
     );
 `);
 };
