@@ -14,10 +14,7 @@ app.listen(port, () => {
  * Middleware
  * 
  */
-const corsOptions = {
-	origin: 'http://localhost:5173',
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
