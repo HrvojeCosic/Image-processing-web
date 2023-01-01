@@ -12,7 +12,10 @@
     />
     <br />
     <br />
-    <img id="preview" :src="previewImage" />
+    <ImageTransition
+      :preview-image="previewImage"
+      :processedImage="processedImage"
+    />
     <br />
     <br />
     <select
@@ -51,10 +54,15 @@
 <script>
 import "../../main.css";
 import $axios from "../../apiRepository/globalRepository";
+import ImageTransition from "./ImageTransition.vue";
 export default {
+  components: {
+    ImageTransition,
+  },
   data() {
     return {
       previewImage: null,
+      processedImage: null,
       processId: null,
       chosenImageProcessingOptionIdx: null,
       inputtedImageProcessingValue: "",
@@ -101,12 +109,13 @@ export default {
         : this.imageProcessingOptions[0].name;
 
       try {
-        const data = await $axios.imageRepository.submitImageProcessingOptions(
+        const res = await $axios.imageRepository.submitImageProcessingOptions(
           this.processId,
           option,
           this.inputtedImageProcessingValue
         );
-        console.log(data);
+        const url = URL.createObjectURL(res.data);
+        this.processedImage = url;
       } catch (error) {
         console.error(error);
         alert("Sending image processing parameters failed");
@@ -123,10 +132,6 @@ input[type="file"] {
   border-radius: 5px;
 }
 
-img {
-  max-width: 300px;
-  height: auto;
-}
 select,
 input,
 button {

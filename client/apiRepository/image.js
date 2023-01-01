@@ -8,11 +8,15 @@ const imageRepository = {
   },
 
   submitImageProcessingOptions: (processId, option, value) => {
-    return axios.post("http://localhost:4000/image/processingOptions", {
-      processId,
-      processingOption: option,
-      processingValue: value,
-    });
+    return axios.post(
+      "http://localhost:4000/image/processingOptions",
+      {
+        processId,
+        processingOption: option,
+        processingValue: value,
+      },
+      { responseType: "blob" }
+    );
   },
 };
 

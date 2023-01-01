@@ -12,6 +12,6 @@ module.exports.submitImage = async (req, res) => {
 
 module.exports.submitImageProcessingOptions = async (req, res) => {
 	const { processId, processingOption, processingValue} = req.body;
-	const resObj = await imageServices.submitImageProcessingOptions(processId, processingOption, processingValue);
-	res.status(200).send(resObj);
+	const img = await imageServices.submitImageProcessingOptions(processId, processingOption, processingValue);
+	res.writeHead(200, { 'Content-Type': 'image/jpeg' }).end(img);
 };
