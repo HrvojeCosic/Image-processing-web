@@ -24,21 +24,9 @@ module.exports.submitImageProcessingOptions = async (processId, processingOption
 	  	-D processingValue="${processingValue ? processingValue : 'NONE'}"`
 		.split('\n').join(' ').replace(/\s+/g, ' ');
 
-	exec(command, {cwd: 'src'})
-		.then(() => {
-			execFile('imageProcessing.exe')
-				.then(async () => {
-					fs.readFile('processed-'+image_name)
-						.then((data) => {
-							return Buffer.from(data); // return the processed image
-						})
-						.catch((err) => {
-							console.log('Error reading processed image: ', err);
-						});
-				}
-				);
-		})
-		.catch((err) => {
-			console.log('Error in processing an image: ', err);
-		});
+	await exec(command, {cwd: 'src'});
+	await execFile('imageProcessing.exe');
+	const processedImage = await fs.readFile('processed-'+image_name);
+
+	return processedImage;
 };
