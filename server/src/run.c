@@ -21,8 +21,8 @@ int main() {
     char filename[64];
     strcpy(filename, STRINGIZE_VALUE_OF(originalFilename));
 
-    sprintf(processedImgFilename, "%s%s%s",
-            filename, "-processed", getImgType(filename));
+    sprintf(processedImgFilename, "%s%s",
+            "processed-", filename);
     rename("processedImg.jpg", processedImgFilename );
     
 

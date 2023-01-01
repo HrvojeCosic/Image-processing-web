@@ -101,11 +101,12 @@ export default {
         : this.imageProcessingOptions[0].name;
 
       try {
-        await $axios.imageRepository.submitImageProcessingOptions(
+        const data = await $axios.imageRepository.submitImageProcessingOptions(
           this.processId,
           option,
           this.inputtedImageProcessingValue
         );
+        console.log(data);
       } catch (error) {
         console.error(error);
         alert("Sending image processing parameters failed");

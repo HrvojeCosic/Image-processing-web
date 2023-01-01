@@ -12,6 +12,7 @@ module.exports.submitImage = async (req, res) => {
 
 module.exports.submitImageProcessingOptions = async (req, res) => {
 	const { processId, processingOption, processingValue} = req.body;
-	await imageServices.submitImageProcessingOptions(processId, processingOption, processingValue);
-	res.status(200).send('ok');
+	const resObj = await imageServices.submitImageProcessingOptions(processId, processingOption, processingValue);
+	console.log('res', resObj);
+	res.status(200).send(resObj);
 };
