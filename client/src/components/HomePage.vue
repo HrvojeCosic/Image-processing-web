@@ -105,13 +105,19 @@ export default {
     },
     async submitImageProcessingOptions() {
       const option = this.chosenImageProcessingOptionIdx
-        ? this.imageProcessingOptions[this.chosenImageProcessingOptionIdx].name
-        : this.imageProcessingOptions[0].name;
+        ? this.imageProcessingOptions[this.chosenImageProcessingOptionIdx]
+        : this.imageProcessingOptions[0];
+
+      if (!this.validateInputtedParamValue(option)) {
+        alert("Invalid inputted value");
+        this.inputtedImageProcessingValue = "";
+        return;
+      }
 
       try {
         const res = await $axios.imageRepository.submitImageProcessingOptions(
           this.processId,
-          option,
+          option.name,
           this.inputtedImageProcessingValue
         );
         const url = URL.createObjectURL(res.data);
@@ -119,6 +125,17 @@ export default {
       } catch (error) {
         console.error(error);
         alert("Sending image processing parameters failed");
+      }
+    },
+    validateInputtedParamValue(option) {
+      if (option.possible_values === []) {
+        return true;
+      } else if (option.possible_values[0] === "number") {
+        return !isNaN(parseInt(this.inputtedImageProcessingValue));
+      } else {
+        return option.possible_values.includes(
+          this.inputtedImageProcessingValue
+        );
       }
     },
   },

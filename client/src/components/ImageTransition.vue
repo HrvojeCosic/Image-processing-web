@@ -16,11 +16,11 @@ export default {
   props: {
     previewImage: {
       type: String,
-      required: true,
+      required: false,
     },
     processedImage: {
       type: String,
-      required: true,
+      required: false,
     },
   },
 };
