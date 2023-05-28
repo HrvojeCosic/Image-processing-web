@@ -8,6 +8,8 @@
 #include "../lib/stb/stb_image_write.h"
 
 char* imageExtensions[] = {".jpg", ".png", ".bmp", NULL};
+char processedImgFilename[100];
+
 
 IMAGE readImg(const char* filename) {
     char path[70] = "";
@@ -63,13 +65,9 @@ void submitChanges(IMAGE img) {
 }
 
 void createImgPath(char* dest, int destSize, const char* filename) {
-    char dirMovement[4] = ""; // TODO: allow saving in other folders
-    int moved = strcat_s(dest, destSize, dirMovement);
-    int applied = strcat_s(dest, destSize, filename);
-    if (moved != 0 || applied != 0) {
-        printf("Error in creating the image path\n");
-        exit(1);
-    }
+    char dirMovement[4] = "";
+    int moved = strcat(dest, dirMovement);
+    int applied = strcat(dest, filename);
 }
 
 char* getImgType(const char* filename) {

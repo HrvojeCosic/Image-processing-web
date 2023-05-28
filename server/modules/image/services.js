@@ -21,12 +21,13 @@ module.exports.submitImageProcessingOptions = async (processId, processingOption
 	const command = `gcc *.c */*.c -o ../imageProcessing 
 		-D originalFilename="${image_name}"
 	 	-D processingOption="${processingOption}"
-	  	-D processingValue="${processingValue ? processingValue : 'NONE'}"`
+	  	-D processingValue="${processingValue ? processingValue : 'NONE'}"
+		-lm`
 		.split('\n').join(' ').replace(/\s+/g, ' ');
 
 	try {
 		await exec(command, {cwd: 'src'});
-		await execFile('imageProcessing.exe');
+		await execFile('./imageProcessing');
 		return await fs.readFile('processed-' + image_name);
 	} catch (err) {
 		console.log('Image processing error: ', err);
