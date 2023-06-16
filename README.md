@@ -1,4 +1,4 @@
-<p align="center"> A web client for [image-processing library](https://github.com/HrvojeCosic/image-processing) </p>
+<p align="center"> A web client for https://github.com/HrvojeCosic/image-processing</p>
 
 <br>
 
