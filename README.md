@@ -1,13 +1,12 @@
-A web client for [image-processing repository](https://github.com/HrvojeCosic/image-processing)
+<p align="center"> A web client for [image-processing library](https://github.com/HrvojeCosic/image-processing) </p>
 
 <br>
 
-## Running locally
-<b>Note: node.js, npm and the gcc compiler are required for project to work locally</b>
+## Setup
+<b>Note: node.js, npm and the gcc compiler are required for project to work locally. Only supported platform currently is Linux</b>
 1) Clone the repository and navigate to it `cd image-processing-web`
-2) Navigate to a server client `cd server`, install packages `npm install` and run it locally `npm run dev` 
-3) Navigate to a frontend client `cd client`, install packages `npm install` and run it locally `npm run dev`. You can now open the URL (shown in your terminal) to run the web client
-
+2) `cd server` -> `npm install` -> `npm run dev` 
+3) `cd client` -> `npm install` -> `npm run dev`
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -5,3 +5,4 @@
 *.png
 node_modules
 bundle.js
+server/temp
