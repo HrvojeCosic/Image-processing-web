@@ -1,12 +1,16 @@
 const repository = require('./repository');
 const util = require('util');
 const exec = util.promisify(require('node:child_process').exec);
-const execFile = util.promisify(require('node:child_process').execFile);
 const fs = require('fs').promises;
 
 
-module.exports.submitImage = async (image) => {
-	const processId = await repository.createImageProcess(image.filename);
+module.exports.submitImage = async (image) => {	
+	const filename = image.filename.replace(/ /g,'');
+	const processId = await repository.createImageProcess(filename); // C args don't like whitespaces
+
+	const tempDir = `${process.env.PWD}/temp`;
+	await fs.rename(`${process.env.PWD}/${filename}`, `${tempDir}/${filename}`);
+
 	return processId;
 };
 
@@ -17,19 +21,13 @@ module.exports.getImageProcessingOptions = async () => {
 
 module.exports.submitImageProcessingOptions = async (processId, processingOption, processingValue) => {
 	const { image_name } = await repository.getProcess(processId);
-
-	const command = `gcc *.c */*.c -o ../imageProcessing 
-		-D originalFilename="${image_name}"
-	 	-D processingOption="${processingOption}"
-	  	-D processingValue="${processingValue ? processingValue : 'NONE'}"
-		-lm`
-		.split('\n').join(' ').replace(/\s+/g, ' ');
+	const tempDir = `${process.env.PWD}/temp`;
+	const command = `make run OG_FNAME="${image_name}" PROC_OPT="${processingOption}" PROC_VAL="${processingValue}"`
 
 	try {
-		await exec(command, {cwd: 'src'});
-		await execFile('./imageProcessing');
-		return await fs.readFile('processed-' + image_name);
+		await exec(command, {cwd: 'temp'});
+		return await fs.readFile(`${tempDir}/processed-` + image_name);
 	} catch (err) {
-		console.log('Image processing error: ', err);
+		console.error('Image processing error: ', err);
 	}
 };

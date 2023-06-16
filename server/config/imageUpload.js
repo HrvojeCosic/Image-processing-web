@@ -28,7 +28,7 @@ const imageUpload = multer({
 			if (file.originalname.split('.').length > 1){
 				ext = file.originalname.substring(file.originalname.lastIndexOf('.'));
 			}
-			cb(null, `${file.originalname.substring(0, file.originalname.lastIndexOf('.'))} - ${Date.now()}${ext}`);
+			cb(null, `${file.originalname.replace(/ /g, '').substring(0, file.originalname.lastIndexOf('.'))}-${Date.now()}${ext}`);
 		}
 	})
 
