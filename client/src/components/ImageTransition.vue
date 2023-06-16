@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex">
+  <div style="display: flex;">
     <img :src="previewImage" />
     <div v-if="processedImage" style="display: flex; align-items: center">
       <div class="arrow">
@@ -28,7 +28,8 @@ export default {
 
 <style scoped>
 img {
-  max-width: 300px;
+  max-width: 600px;
+  max-height: 400px;
   height: auto;
 }
 

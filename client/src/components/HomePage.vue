@@ -1,23 +1,18 @@
 <template>
-  <div>
+  <div class="main-container">
     <h1>Image Upload</h1>
     <p>Select an image to upload:</p>
 
+    <div>
     <input
       type="file"
       accept="image"
       enctype="multipart/form-data"
       @change="handleImageInput"
       id="fileInput"
+      style="display: block;"
     />
-    <br />
-    <br />
-    <ImageTransition
-      :preview-image="previewImage"
-      :processedImage="processedImage"
-    />
-    <br />
-    <br />
+
     <select
       ref="optionSelector"
       v-if="imageProcessingOptions.length"
@@ -31,7 +26,7 @@
         {{ option.name }}
       </option>
     </select>
-    <br />
+
     <input
       v-if="
         chosenImageProcessingOptionIdx &&
@@ -40,14 +35,24 @@
       v-model="inputtedImageProcessingValue"
       type="text"
       :placeholder="`${chosenImageProcessingOption.parameters} (${chosenImageProcessingOption.possible_values})`"
+      style="margin-left: 10px;"
     />
-    <br />
+
     <input
       v-if="chosenImageProcessingOptionIdx !== false"
       type="submit"
       @click="submitImageProcessingOptions"
-      style="cursor: pointer"
+      style="cursor: pointer; display: block"
     />
+    <br />
+    </div>
+
+    <div>
+    <ImageTransition
+      :preview-image="previewImage"
+      :processedImage="processedImage"
+    />
+    </div>
   </div>
 </template>
 
@@ -157,5 +162,10 @@ button {
   border-radius: 5px;
   font-size: 16px;
   margin: 5px 0;
+}
+
+.main-container {
+  height: 95vh;
+  padding: 15px;
 }
 </style>
