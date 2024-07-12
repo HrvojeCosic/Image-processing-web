@@ -130,6 +130,8 @@ export default {
       } catch (error) {
         console.error(error);
         alert("Sending image processing parameters failed");
+      } finally {
+        this.inputtedImageProcessingValue = "";
       }
     },
     validateInputtedParamValue(option) {

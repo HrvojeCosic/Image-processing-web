@@ -9,7 +9,7 @@ module.exports.createDefaultTableData = async () => {
         ('blur', ARRAY['blur radius'], ARRAY['number']),
         ('flip', ARRAY['plane direction'], ARRAY['horizontal', 'vertical']),
         ('rotate', ARRAY['direction'], ARRAY['left', 'right']),
-        ('pixel sort', ARRAY[''], ARRAY[''])
+        ('pixelSort', ARRAY[''], ARRAY[''])
         ON CONFLICT DO NOTHING
     `);
 };
